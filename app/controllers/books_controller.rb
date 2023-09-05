@@ -6,6 +6,11 @@ class BooksController < ApplicationController
     @user = @book.user
     @book_comment = BookComment.new
     @book_comments = BookComment.where(book_id: @book.id)
+    
+    unless ViewCount.find_by(user_id: current_user.id, book_id: @book.id)
+      #このunlessにより、同一ユーザーの同一投稿への閲覧は再カウントしない
+      current_user.view_counts.create(book_id: @book.id)
+    end
   end
 
   def index
