@@ -9,7 +9,10 @@ class BooksController < ApplicationController
     
     unless ViewCount.find_by(user_id: current_user.id, book_id: @book.id)
       #このunlessにより、同一ユーザーの同一投稿への閲覧は再カウントしない
-      current_user.view_counts.create(book_id: @book.id)
+      unless @book.user_id == current_user.id
+        #自分の投稿へのアクセスでは閲覧数をカウントしない
+        current_user.view_counts.create(book_id: @book.id)
+      end
     end
   end
 
