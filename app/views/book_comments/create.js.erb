@@ -1,3 +1,0 @@
-$("#comment_form_<%= @book.id %>").html("<%= j(render 'book_comments/book_comment', book_comments: @book_comments) %>")
-$("#error_form_<%= @book.id %>").html("<%= j(render 'layouts/errors', obj: @book_comment) %>")
-$("#create_comment_<%= @book.id %>").html("<%= j(render 'book_comments/create_comment',book: @book, book_comment: @book_comment) %>")
